@@ -1,28 +1,42 @@
 using Microsoft.AspNetCore.Mvc;
 
-
-[Route("api/[controller]")]
-[ApiController]
-public class PatientController: ControllerBase
+namespace YourNamespace.Controllers
 {
-    [HttpGet("GetPatientInformation/{patientId}")]
-  public IActionResult GetPatientInformation(int patientId)
-  {
-    Patient patient = new Patient
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PatientController : ControllerBase
+    {
+        [HttpGet("GetPatientInformation/{patientId}")]
+        public IActionResult GetPatientInformation(int patientId)
         {
-            Id = patientId,
-            Name = "Sushanth",
-            Age = 25,
-            Diagnosis = "Hypertension"
-        };
-    return Ok(patient);
-  }
+            var patient = new Patient
+            {
+                // Id = patientId,
+                // FirstName = "Maneesh",
+                // LastName = "Ch",
+                // DateOfBirth = new DateTime(2000, 1, 1),
+                // Insurance = "Medi",
+                // Phone = 1234567890,
+                // StreetAddress = "123 Main St",
+                // City = "CityX",
+                // State = "StateY",
+                // ZipCode = "12345",
+                // Country = "US",
+                // SelectGender = "Male",
+                // MedicalHistory = new List<string> { "Diabetes" },
+                // MaritalStatus = "Single"
+            };
 
-  [HttpPost ("Register")]
-  public IActionResult Register(Patient patient)
-  {
-    System.Console.WriteLine(patient.Id);
-    return Ok(patient);
-  }
-  
+            return Ok(patient);
+        }
+
+        [HttpPost("Register")]
+        public IActionResult Register([FromBody] Patient patient)
+        {
+            // Log or save patient details here
+            // Console.WriteLine($"Received patient: {patient.FirstName} {patient.LastName}");
+
+            return Ok(new {patient });
+        }
+    }
 }
